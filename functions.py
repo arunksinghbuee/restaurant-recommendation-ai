@@ -179,14 +179,14 @@ def dictionary_present(response):
 
             Here are some sample input output pairs for better understanding:
             {delimiter}
-            input: - GPU intensity: low - Display quality: high - Portability: low - Multitasking: high - Processing speed: medium - Budget: 50,000 INR
-            output: {{'GPU intensity': 'low', 'Display quality': 'high', 'Portability': 'low', 'Multitasking': 'high', 'Processing speed': 'medium', 'Budget': '50000'}}
+            input: - Occassion : Birthday Celebration - Cousion Preference: French - Dietary Restriciton: Dairy-Free - Location: Gurgaon
+            output: {{'Occassion': 'Birthday Celebration', 'Cousion Preference': 'French', 'Dietary Restriciton': 'Dairy-Free', 'Location': 'Gurgaon' }}
 
-            input: {{'GPU intensity':     'low', 'Display quality':     'high', 'Portability':    'low', 'Multitasking': 'high', 'Processing speed': 'medium', 'Budget': '90,000'}}
-            output: {{'GPU intensity': 'low', 'Display quality': 'high', 'Portability': 'low', 'Multitasking': 'high', 'Processing speed': 'medium', 'Budget': '90000'}}
+            input: {{'Occassion':     'Birthday Celebration', 'Cousion Preference':     'French', 'Dietary Restriciton':    'Dairy-Free', 'Location': 'Gurgaon' }}
+            output: {{'Occassion': 'Birthday Celebration', 'Cousion Preference': 'French', 'Dietary Restriciton': 'Dairy-Free', 'Location': 'Gurgaon' }}
 
-            input: Here is your user profile 'GPU intensity': 'high','Display quality': 'high','Portability': 'medium','Multitasking': 'low','Processing speed': 'high','Budget': '200000 INR'
-            output: {{'GPU intensity': 'high','Display quality': 'high','Portability': 'medium','Multitasking': 'high','Processing speed': 'low','Budget': '200000'}}
+            input: Here is your user profile 'Occassion': 'Birthday Celebration','Cousion Preference': 'French','Dietary Restriciton': 'Dairy-Free','Location': 'Gurgaon'
+            output: {{'Occassion': 'Birthday Celebration', 'Cousion Preference': 'French', 'Dietary Restriciton': 'Dairy-Free', 'Location': 'Gurgaon' }}
             {delimiter}
 
             Here is the input {response}

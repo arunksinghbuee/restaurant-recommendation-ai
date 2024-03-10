@@ -11,16 +11,16 @@ def initialize_conversation():
     '''
 
     delimiter = "####"
-    example_user_req = {'Occassion': 'Date Night','Cousion Preference': 'Italian','Dietary Restriciton': 'Vegetarian','Location': 'Sector 99, Noida'}
+    example_user_req = {'Occasion': 'Date Night','Cuisine Preference': 'Italian','Dietary Restriction': 'Vegetarian','Location': 'Sector 99, Noida'}
 
     system_message = f"""
 
     You are an intelligent restaurant recommendation expert and your goal is to find the best nearby restaurant for a user.
     You need to ask relevant questions and understand the user profile by analysing the user's responses.
-    You final objective is to fill the values for the different keys ('Occassion' ,'Cousion Preference','Dietary Restriciton','Location') in the python dictionary and be confident of the values.
+    You final objective is to fill the values for the different keys ('Occasion' ,'Cuisine Preference','Dietary Restriction','Location') in the python dictionary and be confident of the values.
     These key value pairs define the user's profile.
-    The python dictionary looks like this {{'Occassion': 'values','Cousion Preference': 'values','Dietary Restriciton': 'values','Location': 'values'}}
-    The values for 'Occassion' key would be as per following definition and must be any of these.
+    The python dictionary looks like this {{'Occasion': 'values','Cuisine Preference': 'values','Dietary Restriction': 'values','Location': 'values'}}
+    The values for 'Occasion' key would be as per following definition and must be any of these.
     Date Night: Restaurants suitable for a romantic evening for couples.
     Family Dinner: Restaurants that are family-friendly and offer a variety of dishes to suit different tastes.
     Business Meeting: Restaurants with a quiet and professional atmosphere, suitable for meetings and discussions.
@@ -39,7 +39,7 @@ def initialize_conversation():
     Pre-Theater Dinner: Restaurants located near theaters and offer a quick and delicious meal before a show.
     After-Work Drinks: Restaurants with a happy hour or special offers on drinks, suitable for after-work gatherings.
 
-    The values for 'Cousion Preference' key would be as per following definition and must be any of these.
+    The values for 'Cuisine Preference' key would be as per following definition and must be any of these.
     American: Classic American dishes such as burgers, fries, and barbecue.
     Italian: Italian cuisine, including pasta, pizza, and risotto.
     Mexican: Mexican dishes such as tacos, burritos, and enchiladas.
@@ -56,7 +56,7 @@ def initialize_conversation():
     Seafood: Restaurants that specialize in seafood dishes, including fish, shrimp, and shellfish.
     Steakhouse: Restaurants that focus on serving high-quality steaks and other meat dishes.
 
-    The values for 'Dietary Restriciton' key would be as per following definition and must be any of these.
+    The values for 'Dietary Restriction' key would be as per following definition and must be any of these.
     Vegetarian: Dishes that do not contain meat or animal-derived ingredients. This can include lacto-vegetarian (dairy is allowed), ovo-vegetarian (eggs are allowed), or vegan (no animal products at all) options.
     Vegan: Dishes that do not contain any animal products, including meat, dairy, eggs, and honey.
     Gluten-Free: Dishes that do not contain gluten, a protein found in wheat, barley, and rye. This is important for people with celiac disease or gluten sensitivity.
@@ -72,16 +72,16 @@ def initialize_conversation():
     The value of 'Location' key would be locality or address of the user.
 
     {delimiter}Here are some instructions around the values for the different keys. If you do not follow this, you'll be heavily penalised.
-    - The value of 'Occassion' must be 'Date Night','Family Dinner','Business Meeting','Birthday Celebration','Anniversary','Casual Dining','Fine Dining','Brunch','Lunch Meeting','Outdoor Dining','Group Gathering','Holiday Celebration','Cocktail Party','Business Lunch','Theme Night','Pre-Theater Dinner','After-Work Drinks'
-    - The value of 'Cousion Preference' must be 'American','Italian','Mexican','Chinese','Japanese','Indian','French','Mediterranean','Thai','Spanish','Korean','Vegetarian','Gluten-Free','Seafood','Steakhouse'
-    - The value of 'Dietary Restriciton' must be 'Vegetarian','Vegan','Gluten-Free','Dairy-Free','Nut-Free','Shellfish-Free','Soy-Free','Low-FODMAP','Low-Carb','Paleo','Allergen-Free'
+    - The value of 'Occasion' must be 'Date Night','Family Dinner','Business Meeting','Birthday Celebration','Anniversary','Casual Dining','Fine Dining','Brunch','Lunch Meeting','Outdoor Dining','Group Gathering','Holiday Celebration','Cocktail Party','Business Lunch','Theme Night','Pre-Theater Dinner','After-Work Drinks'
+    - The value of 'Cuisine Preference' must be 'American','Italian','Mexican','Chinese','Japanese','Indian','French','Mediterranean','Thai','Spanish','Korean','Vegetarian','Gluten-Free','Seafood','Steakhouse'
+    - The value of 'Dietary Restriction' must be 'Vegetarian','Vegan','Gluten-Free','Dairy-Free','Nut-Free','Shellfish-Free','Soy-Free','Low-FODMAP','Low-Carb','Paleo','Allergen-Free'
     - Do not randomly assign values to any of the keys. The values need to be inferred from the user's response.
     {delimiter}
 
     To fill the dictionary, you need to have the following chain of thoughts:
     {delimiter} Thought 1: Ask a question to understand the user's profile and requirements. \n
     If their requirements is is unclear. Ask another question to comprehend their needs.
-    You are trying to fill the values of all the keys ('Occassion','Cousion Preference','Dietary Restriciton','Location') in the python dictionary by understanding the user requirements.
+    You are trying to fill the values of all the keys ('Occasion','Cuisine Preference','Dietary Restriction','Location') in the python dictionary by understanding the user requirements.
     Identify the keys for which you can fill the values confidently using the understanding. \n
     Remember the instructions around the values for the different keys.
     Answer "Yes" or "No" to indicate if you understand the requirements and have updated the values for the relevant keys. \n
@@ -104,7 +104,7 @@ def initialize_conversation():
     User: "Sure, I'm in Sector 99, Noida."
     Assistant: "Perfect! What type of cuisine are you interested in?"
     User: "Maybe something Italian."
-    Assistant: "Got it. Do you have any dietary restrictions I should be aware of?"
+    Assistant: "Got it. Do you have any Dietary Restriction I should be aware of?"
     User: "Yes, I am looking for Vegetarian restaurant."
     Assistant: "{example_user_req}"
     {delimiter}
@@ -144,9 +144,9 @@ def intent_confirmation_layer(response_assistant):
     You are a senior evaluator who has an eye for detail.
     You are provided an input. You need to evaluate if the input has the following keys: 'GPU intensity','Display quality','Portability','Multitasking',' Processing speed','Budget'
     Next you need to evaluate if the keys have the the values filled correctly.
-    - The value of 'Occassion' must be 'Date Night','Family Dinner','Business Meeting','Birthday Celebration','Anniversary','Casual Dining','Fine Dining','Brunch','Lunch Meeting','Outdoor Dining','Group Gathering','Holiday Celebration','Cocktail Party','Business Lunch','Theme Night','Pre-Theater Dinner','After-Work Drinks'
-    - The value of 'Cousion Preference' must be 'American','Italian','Mexican','Chinese','Japanese','Indian','French','Mediterranean','Thai','Spanish','Korean','Vegetarian','Gluten-Free','Seafood','Steakhouse'
-    - The value of 'Dietary Restriciton', if provided must be 'Vegetarian','Vegan','Gluten-Free','Dairy-Free','Nut-Free','Shellfish-Free','Soy-Free','Low-FODMAP','Low-Carb','Paleo','Allergen-Free'
+    - The value of 'Occasion' must be 'Date Night','Family Dinner','Business Meeting','Birthday Celebration','Anniversary','Casual Dining','Fine Dining','Brunch','Lunch Meeting','Outdoor Dining','Group Gathering','Holiday Celebration','Cocktail Party','Business Lunch','Theme Night','Pre-Theater Dinner','After-Work Drinks'
+    - The value of 'Cuisine Preference' must be 'American','Italian','Mexican','Chinese','Japanese','Indian','French','Mediterranean','Thai','Spanish','Korean','Vegetarian','Gluten-Free','Seafood','Steakhouse'
+    - The value of 'Dietary Restriction', if provided must be 'Vegetarian','Vegan','Gluten-Free','Dairy-Free','Nut-Free','Shellfish-Free','Soy-Free','Low-FODMAP','Low-Carb','Paleo','Allergen-Free'
     - The value of 'Location' must be a locality or address of the user.
     Output a string 'Yes' if the values are correctly filled for all keys listed above.
     Otherwise out the string 'No'.
@@ -179,14 +179,14 @@ def dictionary_present(response):
 
             Here are some sample input output pairs for better understanding:
             {delimiter}
-            input: - Occassion : Birthday Celebration - Cousion Preference: French - Dietary Restriciton: Dairy-Free - Location: Gurgaon
-            output: {{'Occassion': 'Birthday Celebration', 'Cousion Preference': 'French', 'Dietary Restriciton': 'Dairy-Free', 'Location': 'Gurgaon' }}
+            input: - Occasion : Birthday Celebration - Cuisine Preference: French - Dietary Restriction: Dairy-Free - Location: Gurgaon
+            output: {{'Occasion': 'Birthday Celebration', 'Cuisine Preference': 'French', 'Dietary Restriction': 'Dairy-Free', 'Location': 'Gurgaon' }}
 
-            input: {{'Occassion':     'Birthday Celebration', 'Cousion Preference':     'French', 'Dietary Restriciton':    'Dairy-Free', 'Location': 'Gurgaon' }}
-            output: {{'Occassion': 'Birthday Celebration', 'Cousion Preference': 'French', 'Dietary Restriciton': 'Dairy-Free', 'Location': 'Gurgaon' }}
+            input: {{'Occasion':     'Birthday Celebration', 'Cuisine Preference':     'French', 'Dietary Restriction':    'Dairy-Free', 'Location': 'Gurgaon' }}
+            output: {{'Occasion': 'Birthday Celebration', 'Cuisine Preference': 'French', 'Dietary Restriction': 'Dairy-Free', 'Location': 'Gurgaon' }}
 
-            input: Here is your user profile 'Occassion': 'Birthday Celebration','Cousion Preference': 'French','Dietary Restriciton': 'Dairy-Free','Location': 'Gurgaon'
-            output: {{'Occassion': 'Birthday Celebration', 'Cousion Preference': 'French', 'Dietary Restriciton': 'Dairy-Free', 'Location': 'Gurgaon' }}
+            input: Here is your user profile 'Occasion': 'Birthday Celebration','Cuisine Preference': 'French','Dietary Restriction': 'Dairy-Free','Location': 'Gurgaon'
+            output: {{'Occasion': 'Birthday Celebration', 'Cuisine Preference': 'French', 'Dietary Restriction': 'Dairy-Free', 'Location': 'Gurgaon' }}
             {delimiter}
 
             Here is the input {response}
@@ -211,83 +211,41 @@ def extract_dictionary_from_string(string):
     # Extract the first dictionary match and convert it to lowercase
     if dictionary_matches:
         dictionary_string = dictionary_matches[0]
-        dictionary_string = dictionary_string.lower()
+        # dictionary_string = dictionary_string.lower()
 
         # Convert the dictionary string to a dictionary object using ast.literal_eval()
         dictionary = ast.literal_eval(dictionary_string)
     return dictionary
 
 def compare_laptops_with_user(user_req_string):
-    laptop_df= pd.read_csv('updated_laptop.csv')
+    restaurant_df= pd.read_csv('./restaurant-data.csv')
     user_requirements = extract_dictionary_from_string(user_req_string)
-    budget = int(user_requirements.get('budget', '0').replace(',', '').split()[0])
-    #This line retrieves the value associated with the key 'budget' from the user_requirements dictionary.
-    #If the key is not found, the default value '0' is used.
-    #The value is then processed to remove commas, split it into a list of strings, and take the first element of the list.
-    #Finally, the resulting value is converted to an integer and assigned to the variable budget.
+    # Remove whitespaces from column names
+    restaurant_df.columns = restaurant_df.columns.str.strip()
 
+    print(restaurant_df.head(5))
+    print(user_requirements)
 
-    filtered_laptops = laptop_df.copy()
-    filtered_laptops['Price'] = filtered_laptops['Price'].str.replace(',','').astype(int)
-    filtered_laptops = filtered_laptops[filtered_laptops['Price'] <= budget].copy()
-    #These lines create a copy of the laptop_df DataFrame and assign it to filtered_laptops.
-    #They then modify the 'Price' column in filtered_laptops by removing commas and converting the values to integers.
-    #Finally, they filter filtered_laptops to include only rows where the 'Price' is less than or equal to the budget.
+    filtered_data = restaurant_df[(restaurant_df['Occasion'] == user_requirements['Occasion']) 
+                       & (restaurant_df['Cuisine Preference'] == user_requirements['Cuisine Preference'])]
 
-    mappings = {
-        'low': 0,
-        'medium': 1,
-        'high': 2
-    }
-    # Create 'Score' column in the DataFrame and initialize to 0
-    filtered_laptops['Score'] = 0
-    for index, row in filtered_laptops.iterrows():
-        user_product_match_str = row['laptop_feature']
-        laptop_values = extract_dictionary_from_string(user_product_match_str)
-        score = 0
+    if(user_requirements['Dietary Restriction'] != 'None'):
+        filtered_data = filtered_data[filtered_data['Dietary Restriction'] == user_requirements['Dietary Restriction']]
 
-        for key, user_value in user_requirements.items():
-            if key.lower() == 'budget':
-                continue  # Skip budget comparison
-            laptop_value = laptop_values.get(key, None)
-            laptop_mapping = mappings.get(laptop_value.lower(), -1)
-            user_mapping = mappings.get(user_value.lower(), -1)
-            if laptop_mapping >= user_mapping:
-                ### If the laptop value is greater than or equal to the user value the score is incremented by 1
-                score += 1
+    # Sort the laptops by score in descending order and return the top 3 products
+    top_restaurants = filtered_data.sort_values('Rating', ascending=False).head(3)
 
-        filtered_laptops.loc[index, 'Score'] = score
-
-    # Sort the laptops by score in descending order and return the top 5 products
-    top_laptops = filtered_laptops.drop('laptop_feature', axis=1)
-    top_laptops = top_laptops.sort_values('Score', ascending=False).head(3)
-
-    return top_laptops.to_json(orient='records')
-
-
-
-
-def recommendation_validation(laptop_recommendation):
-    data = json.loads(laptop_recommendation)
-    data1 = []
-    for i in range(len(data)):
-        if data[i]['Score'] > 2:
-            data1.append(data[i])
-
-    return data1
-
-
-
+    return top_restaurants.to_json(orient='records')
 
 def initialize_conv_reco(products):
     system_message = f"""
-    You are an intelligent laptop gadget expert and you are tasked with the objective to \
-    solve the user queries about any product from the catalogue: {products}.\
+    You are an intelligent restaurant recommendation expert and you are tasked with the objective to \
+    solve the user queries about any restaurant provided available: {products}.\
     You should keep the user profile in mind while answering the questions.\
 
-    Start with a brief summary of each laptop in the following format, in decreasing order of price of laptops:
-    1. <Laptop Name> : <Major specifications of the laptop>, <Price in Rs>
-    2. <Laptop Name> : <Major specifications of the laptop>, <Price in Rs>
+    Start with a brief summary of each restaurant in the following format, in decreasing order of rating of restaurants:
+    1. <Restaurant Name> : <Restaurant features such as Occasion,Cuisine Preference,Dietary Restriction, Location>
+    2. <Restaurant Name> : <Restaurant features such as Occasion,Cuisine Preference,Dietary Restriction, Location>
 
     """
     conversation = [{"role": "system", "content": system_message }]

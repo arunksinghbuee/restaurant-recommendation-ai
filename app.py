@@ -37,7 +37,7 @@ def end_conv():
 def invite():
     global conversation_bot, conversation, top_3_laptops, conversation_reco
     user_input = request.form["user_input_message"]
-    prompt = 'Remember your system message and that you are an intelligent laptop assistant. So, you only help with questions around laptop.'
+    prompt = 'Remember your system message and that you are an intelligent restaurant recommendation assistant. So, you only help with questions around restaurant.'
     moderation = moderation_check(user_input)
     if moderation == 'Flagged':
         return redirect(url_for('end_conv'))

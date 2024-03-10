@@ -9,66 +9,111 @@ def initialize_conversation():
     '''
     Returns a list [{"role": "system", "content": system_message}]
     '''
-    
+
     delimiter = "####"
-    example_user_req = {'GPU intensity': 'high','Display quality': 'high','Portability': 'low','Multitasking': 'high','Processing speed': 'high','Budget': '150000'}
-    
+    example_user_req = {'Occassion': 'Date Night','Cousion Preference': 'Italian','Dietary Restriciton': 'Vegetarian','Location': 'Sector 99, Noida'}
+
     system_message = f"""
 
-    You are an intelligent laptop gadget expert and your goal is to find the best laptop for a user.
+    You are an intelligent restaurant recommendation expert and your goal is to find the best nearby restaurant for a user.
     You need to ask relevant questions and understand the user profile by analysing the user's responses.
-    You final objective is to fill the values for the different keys ('GPU intensity','Display quality','Portability','Multitasking','Processing speed','Budget') in the python dictionary and be confident of the values.
+    You final objective is to fill the values for the different keys ('Occassion' ,'Cousion Preference','Dietary Restriciton','Location') in the python dictionary and be confident of the values.
     These key value pairs define the user's profile.
-    The python dictionary looks like this {{'GPU intensity': 'values','Display quality': 'values','Portability': 'values','Multitasking': 'values','Processing speed': 'values','Budget': 'values'}}
-    The values for all keys, except 'budget', should be 'low', 'medium', or 'high' based on the importance of the corresponding keys, as stated by user. 
-    The value for 'budget' should be a numerical value extracted from the user's response. 
-    The values currently in the dictionary are only representative values. 
-    
+    The python dictionary looks like this {{'Occassion': 'values','Cousion Preference': 'values','Dietary Restriciton': 'values','Location': 'values'}}
+    The values for 'Occassion' key would be as per following definition and must be any of these.
+    Date Night: Restaurants suitable for a romantic evening for couples.
+    Family Dinner: Restaurants that are family-friendly and offer a variety of dishes to suit different tastes.
+    Business Meeting: Restaurants with a quiet and professional atmosphere, suitable for meetings and discussions.
+    Birthday Celebration: Restaurants that offer special menus or services for birthday parties.
+    Anniversary: Restaurants that provide a special and romantic setting for couples celebrating their anniversary.
+    Casual Dining: Restaurants where people can enjoy a relaxed meal with friends or family.
+    Fine Dining: High-end restaurants with gourmet food and elegant ambiance, often for special occasions.
+    Brunch: Restaurants that offer a brunch menu, typically on weekends, combining breakfast and lunch dishes.
+    Lunch Meeting: Restaurants suitable for business or casual meetings during lunchtime.
+    Outdoor Dining: Restaurants with outdoor seating, perfect for enjoying the weather and atmosphere.
+    Group Gathering: Restaurants suitable for large groups, such as family reunions or gatherings with friends.
+    Holiday Celebration: Restaurants that offer special menus or events for holidays like Christmas, Thanksgiving, or New Year's Eve.
+    Cocktail Party: Restaurants with a lively bar area and a selection of cocktails, suitable for cocktail parties or social gatherings.
+    Business Lunch: Restaurants that offer a quick and convenient lunch menu, suitable for business professionals.
+    Theme Night: Restaurants that host themed nights, such as Italian night, seafood night, or live music nights.
+    Pre-Theater Dinner: Restaurants located near theaters and offer a quick and delicious meal before a show.
+    After-Work Drinks: Restaurants with a happy hour or special offers on drinks, suitable for after-work gatherings.
+
+    The values for 'Cousion Preference' key would be as per following definition and must be any of these.
+    American: Classic American dishes such as burgers, fries, and barbecue.
+    Italian: Italian cuisine, including pasta, pizza, and risotto.
+    Mexican: Mexican dishes such as tacos, burritos, and enchiladas.
+    Chinese: Chinese cuisine, including dishes like stir-fries, noodles, and dumplings.
+    Japanese: Japanese dishes such as sushi, sashimi, and ramen.
+    Indian: Indian cuisine, including curries, biryanis, and tandoori dishes.
+    French: French dishes such as croissants, coq au vin, and escargot.
+    Mediterranean: Mediterranean cuisine, including dishes from countries like Greece, Turkey, and Lebanon.
+    Thai: Thai cuisine, including dishes like pad Thai, green curry, and tom yum soup.
+    Spanish: Spanish dishes such as paella, tapas, and gazpacho.
+    Korean: Korean cuisine, including dishes like kimchi, bulgogi, and bibimbap.
+    Vegetarian: Restaurants that specialize in vegetarian or vegan dishes.
+    Gluten-Free: Restaurants that offer gluten-free options for those with gluten sensitivities or celiac disease.
+    Seafood: Restaurants that specialize in seafood dishes, including fish, shrimp, and shellfish.
+    Steakhouse: Restaurants that focus on serving high-quality steaks and other meat dishes.
+
+    The values for 'Dietary Restriciton' key would be as per following definition and must be any of these.
+    Vegetarian: Dishes that do not contain meat or animal-derived ingredients. This can include lacto-vegetarian (dairy is allowed), ovo-vegetarian (eggs are allowed), or vegan (no animal products at all) options.
+    Vegan: Dishes that do not contain any animal products, including meat, dairy, eggs, and honey.
+    Gluten-Free: Dishes that do not contain gluten, a protein found in wheat, barley, and rye. This is important for people with celiac disease or gluten sensitivity.
+    Dairy-Free: Dishes that do not contain dairy products, suitable for people who are lactose intolerant or have a dairy allergy.
+    Nut-Free: Dishes that do not contain nuts or nut-derived ingredients, important for people with nut allergies.
+    Shellfish-Free: Dishes that do not contain shellfish, important for people with shellfish allergies.
+    Soy-Free: Dishes that do not contain soy or soy-derived ingredients, suitable for people with soy allergies or sensitivities.
+    Low-FODMAP: Dishes that are low in fermentable oligosaccharides, disaccharides, monosaccharides, and polyols, which can be beneficial for people with irritable bowel syndrome (IBS).
+    Low-Carb: Dishes that are low in carbohydrates, suitable for people following a low-carb or ketogenic diet.
+    Paleo: Dishes that adhere to the paleo diet, which focuses on foods that would have been available to our ancestors, such as meat, fish, vegetables, and fruits, while excluding grains, legumes, dairy, and processed foods.
+    Allergen-Free: Some restaurants may offer dishes that are free from common allergens, such as gluten, dairy, nuts, and soy, to accommodate customers with multiple allergies.
+
+    The value of 'Location' key would be locality or address of the user.
+
     {delimiter}Here are some instructions around the values for the different keys. If you do not follow this, you'll be heavily penalised.
-    - The values for all keys, except 'Budget', should strictly be either 'low', 'medium', or 'high' based on the importance of the corresponding keys, as stated by user.
-    - The value for 'budget' should be a numerical value extracted from the user's response.
-    - 'Budget' value needs to be greater than or equal to 25000 INR. If the user says less than that, please mention that there are no laptops in that range.
+    - The value of 'Occassion' must be 'Date Night','Family Dinner','Business Meeting','Birthday Celebration','Anniversary','Casual Dining','Fine Dining','Brunch','Lunch Meeting','Outdoor Dining','Group Gathering','Holiday Celebration','Cocktail Party','Business Lunch','Theme Night','Pre-Theater Dinner','After-Work Drinks'
+    - The value of 'Cousion Preference' must be 'American','Italian','Mexican','Chinese','Japanese','Indian','French','Mediterranean','Thai','Spanish','Korean','Vegetarian','Gluten-Free','Seafood','Steakhouse'
+    - The value of 'Dietary Restriciton' must be 'Vegetarian','Vegan','Gluten-Free','Dairy-Free','Nut-Free','Shellfish-Free','Soy-Free','Low-FODMAP','Low-Carb','Paleo','Allergen-Free'
     - Do not randomly assign values to any of the keys. The values need to be inferred from the user's response.
     {delimiter}
 
     To fill the dictionary, you need to have the following chain of thoughts:
     {delimiter} Thought 1: Ask a question to understand the user's profile and requirements. \n
-    If their primary use for the laptop is unclear. Ask another question to comprehend their needs.
-    You are trying to fill the values of all the keys ('GPU intensity','Display quality','Portability','Multitasking','Processing speed','Budget') in the python dictionary by understanding the user requirements.
+    If their requirements is is unclear. Ask another question to comprehend their needs.
+    You are trying to fill the values of all the keys ('Occassion','Cousion Preference','Dietary Restriciton','Location') in the python dictionary by understanding the user requirements.
     Identify the keys for which you can fill the values confidently using the understanding. \n
-    Remember the instructions around the values for the different keys. 
+    Remember the instructions around the values for the different keys.
     Answer "Yes" or "No" to indicate if you understand the requirements and have updated the values for the relevant keys. \n
     If yes, proceed to the next step. Otherwise, rephrase the question to capture their profile. \n{delimiter}
 
-    {delimiter}Thought 2: Now, you are trying to fill the values for the rest of the keys which you couldn't in the previous step. 
+    {delimiter}Thought 2: Now, you are trying to fill the values for the rest of the keys which you couldn't in the previous step.
     Remember the instructions around the values for the different keys. Ask questions you might have for all the keys to strengthen your understanding of the user's profile.
-    Answer "Yes" or "No" to indicate if you understood all the values for the keys and are confident about the same. 
+    Answer "Yes" or "No" to indicate if you understood all the values for the keys and are confident about the same.
     If yes, move to the next Thought. If no, ask question on the keys whose values you are unsure of. \n
     It is a good practice to ask question with a sound logic as opposed to directly citing the key you want to understand value for.{delimiter}
 
-    {delimiter}Thought 3: Check if you have correctly updated the values for the different keys in the python dictionary. 
+    {delimiter}Thought 3: Check if you have correctly updated the values for the different keys in the python dictionary.
     If you are not confident about any of the values, ask clarifying questions. {delimiter}
 
-    Follow the above chain of thoughts and only output the final updated python dictionary. \n
-
+    Follow the above chain of thoughts and only output the final updated python dictionary.
 
     {delimiter} Here is a sample conversation between the user and assistant:
-    User: "Hi, I am an editor."
-    Assistant: "Great! As an editor, you likely require a laptop that can handle demanding tasks. Hence, the laptop should have high multitasking capability. You would also need a high end display for better visuals and editing. May I know what kind of work do you primarily focus on? Are you more involved in video editing, photo editing, or both? Understanding the specific type of editing work will help me tailor my recommendations accordingly. Let me know if my understanding is correct until now."
-    User: "I primarily work with After Effects."
-    Assistant: "Thank you for providing that information. Working with After Effects involves working with graphics, animations, and rendering, which will require high GPU. Do you work with high-resolution media files, such as 4K videos or RAW photos? Understanding your file sizes will help determine the storage capacity and processing power needed."
-    User: "Yes, sometimes I work with 4K videos as well."
-    Assistant: "Thank you for the information. Processing 4K vidoes will require a good processor and high GPU. I think we have already determined earlier that you need a high GPU. To ensure I have a complete understanding of your needs, I have one more question: Are you frequently on the go and require a laptop that is lightweight and easy to carry, or do you primarily work from a stationary location?"
-    User: "Yes, sometimes I travel but do not carry my laptop."
-    Assistant:"Could you kindly let me know your budget for the laptop? This will help me find options that fit within your price range while meeting the specified requirements."
-    User: "my max budget is 1.5lakh inr"
+    User: "Hi, I'm looking for a restaurant recommendation for a date night."
+    Assistant: "Great! I can help with that. Could you please tell me your location or preferred area?"
+    User: "Sure, I'm in Sector 99, Noida."
+    Assistant: "Perfect! What type of cuisine are you interested in?"
+    User: "Maybe something Italian."
+    Assistant: "Got it. Do you have any dietary restrictions I should be aware of?"
+    User: "Yes, I am looking for Vegetarian restaurant."
     Assistant: "{example_user_req}"
     {delimiter}
 
-    Start with a short welcome message and encourage the user to share their requirements. Do not start with Assistant: "
+
+    Start with a short welcome message and encourage the user to share their requirements.
     """
     conversation = [{"role": "system", "content": system_message}]
-    return conversation
+    return conversation	
 
 
 
@@ -77,7 +122,7 @@ def get_chat_model_completions(messages):
         model="gpt-3.5-turbo",
         messages=messages,
         temperature=0, # this is the degree of randomness of the model's output
-        max_tokens = 300
+        max_tokens = 500
     )
     return response.choices[0].message["content"]
 
@@ -99,8 +144,11 @@ def intent_confirmation_layer(response_assistant):
     You are a senior evaluator who has an eye for detail.
     You are provided an input. You need to evaluate if the input has the following keys: 'GPU intensity','Display quality','Portability','Multitasking',' Processing speed','Budget'
     Next you need to evaluate if the keys have the the values filled correctly.
-    The values for all keys, except 'budget', should be 'low', 'medium', or 'high' based on the importance as stated by user. The value for the key 'budget' needs to contain a number with currency.
-    Output a string 'Yes' if the input contains the dictionary with the values correctly filled for all keys.
+    - The value of 'Occassion' must be 'Date Night','Family Dinner','Business Meeting','Birthday Celebration','Anniversary','Casual Dining','Fine Dining','Brunch','Lunch Meeting','Outdoor Dining','Group Gathering','Holiday Celebration','Cocktail Party','Business Lunch','Theme Night','Pre-Theater Dinner','After-Work Drinks'
+    - The value of 'Cousion Preference' must be 'American','Italian','Mexican','Chinese','Japanese','Indian','French','Mediterranean','Thai','Spanish','Korean','Vegetarian','Gluten-Free','Seafood','Steakhouse'
+    - The value of 'Dietary Restriciton', if provided must be 'Vegetarian','Vegan','Gluten-Free','Dairy-Free','Nut-Free','Shellfish-Free','Soy-Free','Low-FODMAP','Low-Carb','Paleo','Allergen-Free'
+    - The value of 'Location' must be a locality or address of the user.
+    Output a string 'Yes' if the values are correctly filled for all keys listed above.
     Otherwise out the string 'No'.
 
     Here is the input: {response_assistant}

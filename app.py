@@ -1,5 +1,5 @@
 from flask import Flask, redirect, url_for, render_template, request
-from functions import initialize_conversation, initialize_conv_reco, get_chat_model_completions, moderation_check,intent_confirmation_layer,dictionary_present,compare_laptops_with_user
+from functions import initialize_conversation, initialize_conv_reco, get_chat_model_completions, moderation_check,intent_confirmation_layer,dictionary_present,compare_restaurants_with_user
 
 import openai
 
@@ -66,7 +66,7 @@ def invite():
 
             conversation_bot.append({'bot':"Thank you for providing all the information. Kindly wait, while I fetch the products: \n"})
             print("Response: ", response)
-            top_3_restaurants = compare_laptops_with_user(response)           
+            top_3_restaurants = compare_restaurants_with_user(response)           
 
             # validated_reco = recommendation_validation(top_3_restaurants)
 

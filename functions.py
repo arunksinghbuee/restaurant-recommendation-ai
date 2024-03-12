@@ -217,7 +217,7 @@ def extract_dictionary_from_string(string):
         dictionary = ast.literal_eval(dictionary_string)
     return dictionary
 
-def compare_laptops_with_user(user_req_string):
+def compare_restaurants_with_user(user_req_string):
     restaurant_df= pd.read_csv('./restaurant-data.csv')
     user_requirements = extract_dictionary_from_string(user_req_string)
     # Remove whitespaces from column names

@@ -2,7 +2,6 @@ import openai
 import ast
 import re
 import pandas as pd
-import json
 
 
 def initialize_conversation():

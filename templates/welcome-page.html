@@ -1,7 +1,7 @@
 <html> 
     <head>
         <title>
-            Restaurant Assist
+            Restaurant Assist AI
         </title>
         <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
     </head>
@@ -9,7 +9,7 @@
         <div class="outercontainer">
             <div class="center">
                 <h1 id="titlestyle">
-                    Restaurant Assist
+                    Restaurant Assist AI
                 </h1>
             </div>
             <div class="conversationcontainer" id="chatcontainer">
@@ -24,7 +24,7 @@
                 {% endfor %}
             </div>
 
-            <form action = "/invite" method="POST" class="center">
+            <form action = "/chat" method="POST" class="center">
                 <input type ="text" name="user_input_message" id = "inputtextbox">
                 <input type="submit" value=" " id="submitbutton">
             </form>

@@ -1,2 +1,5 @@
 
 api_key.txt
+test-compare-laptop.py
+__pycache__/
+__pycache__/functions.cpython-311.pyc

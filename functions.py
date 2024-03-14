@@ -165,11 +165,9 @@ def intent_confirmation_layer(response_assistant):
     return confirmation["choices"][0]["text"]
 
 
-
-
 def dictionary_present(response):
-    delimiter = "####"
-    user_req = {'GPU intensity': 'high','Display quality': 'high','Portability': 'medium','Multitasking': 'high','Processing speed': 'high','Budget': '200000 INR'}
+    delimiter = "####"    
+    user_req = {'Occasion': 'Date Night','Cuisine Preference': 'Italian','Dietary Restriction': 'Vegetarian','Location': 'Sector 99, Noida'}
     prompt = f"""You are a python expert. You are provided an input.
             You have to check if there is a python dictionary present in the string.
             It will have the following format {user_req}.
@@ -201,8 +199,6 @@ def dictionary_present(response):
     )
     return response["choices"][0]["text"]
 
-
-
 def extract_dictionary_from_string(string):
     regex_pattern = r"\{[^{}]+\}"
 
@@ -223,8 +219,8 @@ def compare_restaurants_with_user(user_req_string):
     # Remove whitespaces from column names
     restaurant_df.columns = restaurant_df.columns.str.strip()
 
-    print(restaurant_df.head(5))
-    print(user_requirements)
+    # TODO: Call a function to get geo lat and long of the location
+    # TODO: Put a logic to find neearest restaurant here
 
     filtered_data = restaurant_df[(restaurant_df['Occasion'] == user_requirements['Occasion']) 
                        & (restaurant_df['Cuisine Preference'] == user_requirements['Cuisine Preference'])]
@@ -250,3 +246,10 @@ def initialize_conv_reco(products):
     """
     conversation = [{"role": "system", "content": system_message }]
     return conversation
+
+# TODO: Write this funciton
+def getGeoLocation(address):
+    lat=0.0
+    long=0.0
+
+    return 

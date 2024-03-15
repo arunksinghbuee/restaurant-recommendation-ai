@@ -2,7 +2,10 @@ import openai
 import ast
 import re
 import pandas as pd
+import requests
+from math import radians, sin, cos, sqrt, asin  
 
+api_key = "";
 
 def initialize_conversation():
     '''
@@ -218,8 +221,9 @@ def compare_restaurants_with_user(user_req_string):
     # Remove whitespaces from column names
     restaurant_df.columns = restaurant_df.columns.str.strip()
 
-    # TODO: Call a function to get geo lat and long of the location
-    # TODO: Put a logic to find neearest restaurant here
+    # Call a function to get geo lat and long of the location
+    #user_lat, user_long = get_lat_long(user_requirements['Location'])
+    #restaurant_df['geoDistance'] = restaurant_df.apply(calculate_distance(row,user_lat, user_long), axis=1)
 
     filtered_data = restaurant_df[(restaurant_df['Occasion'] == user_requirements['Occasion']) 
                        & (restaurant_df['Cuisine Preference'] == user_requirements['Cuisine Preference'])]
@@ -227,7 +231,7 @@ def compare_restaurants_with_user(user_req_string):
     if(user_requirements['Dietary Restriction'] != 'None'):
         filtered_data = filtered_data[filtered_data['Dietary Restriction'] == user_requirements['Dietary Restriction']]
 
-    # Sort the laptops by score in descending order and return the top 3 products
+    #top_restaurants = filtered_data.sort_values(by=['geoDistance', 'Rating'], ascending=[True, False]).head(3)
     top_restaurants = filtered_data.sort_values('Rating', ascending=False).head(3)
 
     return top_restaurants.to_json(orient='records')
@@ -246,9 +250,24 @@ def initialize_conv_reco(products):
     conversation = [{"role": "system", "content": system_message }]
     return conversation
 
-# TODO: Write this funciton
-def getGeoLocation(address):
-    lat=0.0
-    long=0.0
+def get_lat_long(address):
+    url = f"https://maps.googleapis.com/maps/api/geocode/json?address={address}&key={api_key}"
+    response = requests.get(url)
+    data = response.json()
+    
+    if data['status'] == 'OK':
+        lat = data['results'][0]['geometry']['location']['lat']
+        lng = data['results'][0]['geometry']['location']['lng']
+        return lat, lng
+    else:
+        return None, None
 
-    return 
+def calculate_distance(row, user_lat, user_long):
+    lat1, lon1 = radians(row['lat']), radians(row['long'])
+    lat2, lon2 = radians(user_lat), radians(user_long)
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+    a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+    c = 2 * asin(sqrt(a))
+    r = 6371  # Radius of Earth in kilometers
+    return c * r
